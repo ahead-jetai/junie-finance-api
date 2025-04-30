@@ -75,7 +75,7 @@ const stockIndices = {
  *                 russell2000:
  *                   $ref: '#/components/schemas/StockIndex'
  */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.json(stockIndices);
 });
 

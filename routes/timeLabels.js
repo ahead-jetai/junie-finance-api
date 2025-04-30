@@ -24,7 +24,7 @@ const timeLabels = [
  *                 type: string
  *               example: ["Mon", "Tue", "Wed", "Thu", "Fri", "Today"]
  */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.json(timeLabels);
 });
 

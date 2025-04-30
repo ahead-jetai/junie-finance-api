@@ -16,8 +16,8 @@ var router = express.Router();
  *             schema:
  *               type: string
  */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', function (req, res, next) {
+    res.render('index', {title: 'Express'});
 });
 
 module.exports = router;

@@ -17,7 +17,7 @@ var router = express.Router();
  *               type: string
  *               example: respond with a resource
  */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
