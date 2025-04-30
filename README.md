@@ -39,6 +39,22 @@ banking metrics. It's built with Express.js and includes Swagger documentation.
 
 ## Production Build and Deployment
 
+### Continuous Deployment with GitHub Actions
+
+This project is configured to automatically deploy to Render when changes are pushed to the main branch using GitHub
+Actions.
+
+#### Setup Instructions:
+
+1. In your Render dashboard, find your service and navigate to the "Settings" tab
+2. Scroll down to the "Deploy Hooks" section
+3. Create a new deploy hook and copy the generated URL
+4. In your GitHub repository, go to "Settings" > "Secrets and variables" > "Actions"
+5. Add a new repository secret with the name `RENDER_DEPLOY_HOOK_URL` and paste the deploy hook URL as the value
+
+Once set up, every push to the main branch will trigger a GitHub Actions workflow that automatically deploys the latest
+changes to Render.
+
 ### Building for Production
 
 To build the application for production:

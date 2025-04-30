@@ -1,8 +1,33 @@
 body {
     padding: 50px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    line-height: 1.6;
 }
 
 a {
     color: #00B7FF;
+    text-decoration: none;
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.powered-by {
+    font-style: italic;
+    margin-left: 5px;
+}
+
+.junie {
+    color: #00C48C;
+    font-weight: bold;
 }
