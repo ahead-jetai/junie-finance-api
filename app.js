@@ -5,6 +5,7 @@ let cookieParser = require('cookie-parser');
 let morgan = require('morgan');
 let swaggerJsdoc = require('swagger-jsdoc');
 let swaggerUi = require('swagger-ui-express');
+let cors = require('cors');
 let logger = require('./logger');
 
 let indexRouter = require('./routes/index');
@@ -194,6 +195,15 @@ app.use(morgan('dev'));
 
 // Log application startup
 logger.info('Application starting up');
+
+// Enable CORS for all routes
+app.use(cors({
+  origin: '*', // Allow all origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow these HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+  credentials: true // Allow cookies to be sent with requests
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
