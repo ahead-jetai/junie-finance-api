@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('junie-finance-dashboard-api:server');
 var http = require('http');
+var logger = require('../logger');
 
 /**
  * Get port from environment and store in Express.
@@ -55,6 +56,7 @@ function normalizePort(val) {
 
 function onError(error) {
     if (error.syscall !== 'listen') {
+        logger.error(`Server error: ${error.message}`);
         throw error;
     }
 
@@ -65,14 +67,15 @@ function onError(error) {
     // handle specific listen errors with friendly messages
     switch (error.code) {
         case 'EACCES':
-            console.error(bind + ' requires elevated privileges');
+            logger.error(bind + ' requires elevated privileges');
             process.exit(1);
             break;
         case 'EADDRINUSE':
-            console.error(bind + ' is already in use');
+            logger.error(bind + ' is already in use');
             process.exit(1);
             break;
         default:
+            logger.error(`Server error: ${error.message}`);
             throw error;
     }
 }
@@ -86,5 +89,5 @@ function onListening() {
     var bind = typeof addr === 'string'
         ? 'pipe ' + addr
         : 'port ' + addr.port;
-    debug('Listening on ' + bind);
+    logger.info('Server listening on ' + bind);
 }

@@ -2,9 +2,10 @@ let createError = require('http-errors');
 let express = require('express');
 let path = require('path');
 let cookieParser = require('cookie-parser');
-let logger = require('morgan');
+let morgan = require('morgan');
 let swaggerJsdoc = require('swagger-jsdoc');
 let swaggerUi = require('swagger-ui-express');
+let logger = require('./logger');
 
 let indexRouter = require('./routes/index');
 let usersRouter = require('./routes/users');
@@ -184,7 +185,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+// Log HTTP requests with Morgan
+app.use(morgan('dev'));
+
+// Log application startup
+logger.info('Application starting up');
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -201,17 +206,28 @@ app.use('/timeLabels', timeLabelsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
+  logger.warn(`404 Not Found: ${req.method} ${req.originalUrl}`);
   next(createError(404));
 });
 
 // error handler
 app.use(function (err, req, res, next) {
+  const status = err.status || 500;
+
+  // Log error details
+  if (status === 500) {
+    logger.error(`Internal Server Error: ${err.message}`);
+    logger.error(err.stack);
+  } else {
+    logger.warn(`${status} ${err.message}`);
+  }
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
-  res.status(err.status || 500);
+  res.status(status);
   res.render('error');
 });
 
