@@ -138,5 +138,6 @@ Log files are automatically created when the application starts. The logs direct
 - `/dailyMetrics` - Daily banking metrics
 - `/marketOverview` - Market overview data
 - `/timeLabels` - Time labels for charts
+- `/api-spec` - Complete API specification in JSON format (for frontend consumption)
 
 For detailed API documentation, visit the `/api-docs` endpoint when the server is running.
